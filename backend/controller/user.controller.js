@@ -27,3 +27,40 @@ module.exports.RegisterUser = async (req, res, next) => {
         res.status(400).json({ error: error.message }); // Send the error message in the response
     }
 };
+module.exports.LoginUser = async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    try {
+        const { email, password } = req.body;
+        
+        // Verify we have both email and password
+        if (!email || !password) {
+            return res.status(400).json({ message: "Email and password are required" });
+        }
+
+        // Make sure to include password in the query
+        const user = await userModel.findOne({ email }).select('+password');
+        
+        if (!user) {
+            return res.status(401).json({ message: "Invalid Email or Password" });
+        }
+
+        // Debug log (remove in production)
+        console.log('Password from request:', password);
+        console.log('Stored hashed password:', user.password);
+        
+        const isMatch = await user.comparePassword(password);
+        if (!isMatch) {
+            return res.status(401).json({ message: "Invalid Email or Password" });
+        }
+
+        const token = user.generateAuthtoken();
+        res.status(200).json({ token, user });
+    } catch (error) {
+        console.error('Login error:', error);
+        next(error);
+    }
+};

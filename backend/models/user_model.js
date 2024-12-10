@@ -35,9 +35,18 @@ userSchema.methods.generateAuthtoken = function () {
     return token;
 };
 
-userSchema.methods.comparePassword= async (password)=>{   
-return await bcrypt.compare(password,this.password)  //this will compare password with the password user put
-}
+userSchema.methods.comparePassword = async function(password) {
+    if (!password) {
+        throw new Error('Password is required');
+    }
+    
+    try {
+        return await bcrypt.compare(password, this.password);
+    } catch (error) {
+        throw new Error('Password comparison failed');
+    }
+};
+
 userSchema.statics.hashPassword=async (password) => {
     return await bcrypt.hash(password,10)     
 }
