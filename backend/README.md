@@ -8,7 +8,7 @@ This endpoint is used to register a new user in the system.
 
 #### Request
 
-- **URL**: `/register`
+- **URL**: `/user/register`
 - **Method**: `POST`
 - **Headers**: 
   - `Content-Type: application/json`
