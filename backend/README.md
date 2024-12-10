@@ -8,7 +8,7 @@ This endpoint is used to register a new user in the system.
 
 #### Request
 
-- **URL**: `/register`
+- **URL**: `/user/register`
 - **Method**: `POST`
 - **Headers**: 
   - `Content-Type: application/json`
@@ -85,6 +85,7 @@ json
 
 - Ensure that the `Content-Type` header is set to `application/json` when making requests to this endpoint.
 - The `token` returned in the success response can be used for authenticating subsequent requests to protected endpoints.
+<<<<<<< HEAD
 
 ## User Login Endpoint
 
@@ -167,3 +168,5 @@ This endpoint authenticates a user and returns an access token.
 
 - Ensure that the `Content-Type` header is set to `application/json` when making requests to this endpoint
 - The returned `token` should be included in the Authorization header for subsequent authenticated requests
+=======
+>>>>>>> d609aeda5604f451f8502f903a92acd0cceb7ded
