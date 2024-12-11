@@ -163,10 +163,40 @@ This endpoint authenticates a user and returns an access token.
   "message": "Invalid Email or Password"
 }
 ```
+## User API Endpoints
 
-### Notes
+### Get User Profile
+- **Route:** `/api/users/profile`
+- **Method:** `GET`
+- **Authentication:** Required (JWT Token)
+- **Description:** Retrieves the profile information of the authenticated user
+- **Response:**
+  ```json
+  {
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "email": "string",
+    "_id": "string"
+  }
+  ```
 
-- Ensure that the `Content-Type` header is set to `application/json` when making requests to this endpoint
-- The returned `token` should be included in the Authorization header for subsequent authenticated requests
-=======
->>>>>>> d609aeda5604f451f8502f903a92acd0cceb7ded
+### Logout User
+- **Route:** `/api/users/logout`
+- **Method:** `GET`
+- **Authentication:** Required (JWT Token)
+- **Description:** Logs out the user by clearing the authentication token and blacklisting it in blacklist model 
+- **Authentication Methods:**
+  - Cookie: `token`
+  - Authorization Header: `Bearer <token>`
+- **Response:**
+  ```json
+  {
+    "message": "Logged out"
+  }
+  ```
+
+**Note:** For authenticated routes, include the JWT token either as:
+- A cookie named `token`
+- Authorization header: `Authorization: Bearer <token>`

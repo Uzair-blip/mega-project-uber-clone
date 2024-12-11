@@ -31,7 +31,11 @@ socketId:{
 })
 
 userSchema.methods.generateAuthtoken = function () {
-    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET); // Correct use of `this`
+    const token = jwt.sign(
+        { _id: this._id },
+        process.env.JWT_SECRET,
+        { expiresIn: '24h' }
+    ); // Token expires in 24 hours
     return token;
 };
 
