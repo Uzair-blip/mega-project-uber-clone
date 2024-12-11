@@ -81,11 +81,7 @@ json
 }
 ```
 
-### Notes
 
-- Ensure that the `Content-Type` header is set to `application/json` when making requests to this endpoint.
-- The `token` returned in the success response can be used for authenticating subsequent requests to protected endpoints.
-<<<<<<< HEAD
 
 ## User Login Endpoint
 
@@ -166,7 +162,7 @@ This endpoint authenticates a user and returns an access token.
 ## User API Endpoints
 
 ### Get User Profile
-- **Route:** `/api/users/profile`
+- **Route:** `/users/profile`
 - **Method:** `GET`
 - **Authentication:** Required (JWT Token)
 - **Description:** Retrieves the profile information of the authenticated user
@@ -183,7 +179,7 @@ This endpoint authenticates a user and returns an access token.
   ```
 
 ### Logout User
-- **Route:** `/api/users/logout`
+- **Route:** `/users/logout`
 - **Method:** `GET`
 - **Authentication:** Required (JWT Token)
 - **Description:** Logs out the user by clearing the authentication token and blacklisting it in blacklist model 
@@ -194,6 +190,131 @@ This endpoint authenticates a user and returns an access token.
   ```json
   {
     "message": "Logged out"
+  }
+  ```
+
+**Note:** For authenticated routes, include the JWT token either as:
+- A cookie named `token`
+- Authorization header: `Authorization: Bearer <token>`
+
+## Captain API Endpoints
+
+### Register Captain
+- **Route:** `/captain/register`
+- **Method:** `POST`
+- **Authentication:** Not Required
+- **Headers:** 
+  - `Content-Type: application/json`
+- **Body:**
+  ```json
+  {
+    "email": "string",
+    "password": "string",
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "vehicle": {
+      "type": "car|motorcycle|rickshaw",
+      "color": "string",
+      "plate": "string",
+      "model": "string",
+      "capacity": "number"
+    }
+  }
+  ```
+- **Success Response:**
+  ```json
+  {
+    "success": true,
+    "message": "Captain registered successfully",
+    "token": "string"
+  }
+  ```
+- **Error Response:**
+  ```json
+  {
+    "success": false,
+    "message": "email already registered"
+  }
+  ```
+
+### Login Captain
+- **Route:** `/captain/login`
+- **Method:** `POST`
+- **Authentication:** Not Required
+- **Headers:** 
+  - `Content-Type: application/json`
+- **Body:**
+  ```json
+  {
+    "email": "string",
+    "password": "string"
+  }
+  ```
+- **Success Response:**
+  ```json
+  {
+    "success": true,
+    "message": "Login successful",
+    "token": "string"
+  }
+  ```
+- **Error Response:**
+  ```json
+  {
+    "message": "Invalid credentials"
+  }
+  ```
+
+### Get Captain Profile
+- **Route:** `/captain/profile`
+- **Method:** `GET`
+- **Authentication:** Required (JWT Token)
+- **Response:**
+  ```json
+  {
+    "fullname": {
+      "firstname": "string",
+      "lastname": "string"
+    },
+    "email": "string",
+    "status": "active|inactive",
+    "vehicle": {
+      "type": "string",
+      "color": "string",
+      "plate": "string",
+      "model": "string",
+      "capacity": "number"
+    },
+    "location": {
+      "lat": "number",
+      "lng": "number"
+    }
+  }
+  ```
+
+
+### Logout Captain
+- **Route:** `/captain/logout`
+- **Method:** `GET`
+- **Authentication:** Required (JWT Token)
+- **Description:** Logs out the captain by clearing the authentication token and blacklisting it
+- **Authentication Methods:**
+  - Cookie: `token`
+  - Authorization Header: `Bearer <token>`
+- **Success Response:**
+  ```json
+  {
+    "success": true,
+    "message": "Logged out successfully"
+  }
+  ```
+- **Error Response:**
+  ```json
+  {
+    "success": false,
+    "message": "Error in logging out"
   }
   ```
 
