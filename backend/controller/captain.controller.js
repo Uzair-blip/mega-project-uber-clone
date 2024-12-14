@@ -3,47 +3,49 @@ const BlacklistTokenModel=require("../models/blacklist.token")
 
 const createError = require("http-errors")
 
-// Register new captain
 const register = async (req, res, next) => {
     try {
-        const { email, password, fullname, vehicle } = req.body
+        const { email, password, fullname, vehicle } = req.body;
+
+        // Debug log: Request body
 
         // Check if captain already exists
-        const existingCaptain = await captainModel.findOne({ email })
+        const existingCaptain = await captainModel.findOne({ email });
         if (existingCaptain) {
-            throw createError(409, "Email already registered")
+            throw createError(409, "Email already registered");
         }
 
         // Hash password
-        const hashedPassword = await captainModel.hashPassword(password)
+        const hashedPassword = await captainModel.hashPassword(password);
 
+        // Debug log: Hashed password
         // Create new captain
         const captain = new captainModel({
             email,
             password: hashedPassword,
             fullname,
-            vehicle
-        })
+            vehicle,
+        });
 
-        await captain.save()
-        
+        await captain.save();
+
         // Generate token
-        const token = captain.generateAuthToken()
+        const token = captain.generateAuthToken();
+        console.log("Generated Token:", token);
 
         res.status(201).json({
             success: true,
             message: "Captain registered successfully",
-            token
-        })
-
+            token,
+        });
     } catch (error) {
-        res.status(401).json({
+        console.error("Registration Error:", error);
+        res.status(400).json({
             success: false,
-            message: "email already registered",
-        
-        })
+            message: error.message || "Registration failed",
+        });
     }
-}
+};
 
 // Login captain
 const login = async (req, res, next) => {

@@ -70,8 +70,21 @@ module.exports.getUserProfile = async (req, res, next) =>{
 res.status(200).json(req.user)
 }
 module.exports.LogoutUser = async (req, res, next) => {
-res.clearCookie("token");
-const token=req.cookies.token|| req.headers.authorization.split("")(1) //this will get token to check which user 
-await BlacklistToken.create({token})
-res.status(200).json({message:"Logged out"})
+    const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+        return res.status(401).json({ message: "Unauthorized" });
+    }
+
+    try {
+        // Clear the token from the cookie
+        res.clearCookie("token", { httpOnly: true, secure: process.env.NODE_ENV === "production" });
+
+        // Add token to blacklist
+        await BlacklistToken.create({ token });
+
+        res.status(200).json({ message: "Logged out successfully" });
+    } catch (error) {
+        res.status(500).json({ message: "Error during logout", error: error.message });
+    }
 }
