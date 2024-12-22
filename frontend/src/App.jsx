@@ -13,6 +13,7 @@ import CaptainProtectWrapper from './pages/CaptainProtectWrapper'
 import CaptainLogout from './pages/CaptainLogout'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Riding from './pages/Riding'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
   <Route  path="/" element={<Home/>} />
   <Route  path="/login" element={<UserLogin/>} />
   <Route  path="/signup" element={<UserSignUp/>} />
+  <Route  path="/riding" element={<Riding/>} />
   <Route  path="/captain-login" element={<CaptainLogin/>} />
   <Route  path="/captain-signup" element={<CaptainSignUp/>} />
   <Route  path="/captain-signup" element={<CaptainSignUp/>} />

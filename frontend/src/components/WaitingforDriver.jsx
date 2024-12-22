@@ -16,6 +16,30 @@ const WaitingforDriver = () => {
 <p className='text-gray-600 ml-10'>White Alto</p>
 <h3 className='ml-20 text-gray-600 font-semibold'><i class="ri-star-s-fill"></i>4.1</h3>
 </div>
+<div className='w-full '>
+ <div className='p-5 border-2 border-gray-200 rounded-lg  '>
+<div className='flex items-start gap-5'>
+    <h3 className='mt-2'><i class="ri-map-pin-2-fill"></i></h3>
+     <h2 className='text-2xl ml-1 font-semibold'>512/11-A</h2>
+    </div>
+     <p className='text-[15px] ml-10 text-gray-500'>Punjab Bank okara</p>
+ </div>
+ <div className='p-5 border-2 border-gray-200 rounded-lg  '>
+<div className='flex items-start gap-5'>
+    <h3 className='mt-2'><i class="ri-map-pin-line"></i></h3>
+     <h2 className='text-2xl ml-1 font-semibold'>China Town </h2>
+    </div>
+     <p className='text-[15px] ml-10 text-gray-500'>Block 7, Gulshan-e-Iqbal, Lahore</p>
+ </div>
+ <div className='p-5 border-2 border-gray-200 rounded-lg  '>
+<div className='flex items-start gap-5'>
+    <h3 className='mt-2'><i class="ri-cash-line"></i></h3>
+     <h2 className='text-2xl ml-1 font-semibold'>200 Pkr</h2>
+    </div>
+     <p className='text-[15px] ml-10 text-gray-500'>Payment Cash</p>
+ </div>
+ 
+</div>
    </div>
           </>
 )

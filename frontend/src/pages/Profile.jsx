@@ -193,7 +193,7 @@ const Profile = () => {
       <div ref={VehicleFounderRef}  className="fixed  w-full bg-white z-10 translate-y-full bottom-0 px-3 py-6">
         <LookingforDriver setVehicleFounder={setVehicleFounder}/>
       </div>
-      <div ref={WaitingDriverRef} className="fixed  w-full bg-white z-10 bottom-0 px-3 py-6">
+      <div ref={WaitingDriverRef} className="fixed  w-full bg-white translate-y-full z-10 bottom-0 px-3 py-6">
         <WaitingforDriver setWaitingforDriver={setWaitingforDriver}/>
       </div>
       
