@@ -14,6 +14,8 @@ import CaptainLogout from './pages/CaptainLogout'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Riding from './pages/Riding'
+import CaptainRide from './pages/CaptainRide'
+import FinishRide from './pages/FinishRide'
 
 const App = () => {
   return (
@@ -27,6 +29,8 @@ const App = () => {
   <Route  path="/captain-login" element={<CaptainLogin/>} />
   <Route  path="/captain-signup" element={<CaptainSignUp/>} />
   <Route  path="/captain-signup" element={<CaptainSignUp/>} />
+  <Route  path="/captain-ride" element={<CaptainRide/>} />
+  <Route  path="/finish-ride" element={<FinishRide/>} />
   <Route path='/profile' element=
   {<UserProtectWrapper>   
       <Profile/>
